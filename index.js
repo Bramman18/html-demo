@@ -23,7 +23,7 @@ const cars = [
     {type:"Saab", year:2001},
     {type:"BMW", year:2010}
   ];
-  let car = cars.sort((a,b) => {
+  let car = cars.sort(() => {
     return a.year -b.year;
   });
   console.log(car);
