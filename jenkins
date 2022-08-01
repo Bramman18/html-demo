@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('SCM') {
+            steps {
+                git 'https://github.com/Bramman18/html-demo.git'
+            }
+        }
+		stage('BUILD') {
+            steps {
+                sh 'mvn clean'
+				sh 'mvn install'
+            }
+        }
+		stage('Deployment') {
+            steps {
+               deploy adapters: [tomcat9(credentialsId: 'web', path: '', url: 'http://localhost:1818/')], contextPath: 'jan-pipe', war: '**/*.war'
+            }
+        }
+    }
+}
